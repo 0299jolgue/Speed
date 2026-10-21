@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HTML Rápido</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--muted:#8c9ab5;--line:#25314b;--accent:#6ee7b7}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#e8edf7;font:15px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid var(--line)}
+.brand{font-weight:750;font-size:18px;letter-spacing:-.03em}.brand span{color:var(--accent)}
+button{border:0;border-radius:9px;background:var(--accent);color:#06261c;font:700 14px inherit;padding:10px 16px;cursor:pointer}button:hover{filter:brightness(1.08)}
+main{height:calc(100vh - 64px);padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+section{min-width:0;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.bar{height:46px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--line);color:var(--muted);font-size:13px}
+textarea{flex:1;width:100%;resize:none;border:0;outline:0;padding:18px;background:#0e1526;color:#dbeafe;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:2}
+iframe{flex:1;width:100%;border:0;background:white}
+.hint{font-size:12px;color:var(--muted)}
+@media(max-width:700px){main{height:auto;min-height:calc(100vh - 64px);grid-template-columns:1fr;grid-template-rows:minmax(360px,1fr) minmax(360px,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="brand">HTML <span>Rápido</span></div><button id="run">▶ Executar</button></header>
+<main>
+<section><div class="bar"><span>O teu código HTML</span><span class="hint">Ctrl + Enter para executar</span></div><textarea id="code" spellcheck="false" aria-label="Código HTML" placeholder="Cola aqui o teu código HTML..."></textarea></section>
+<section><div class="bar"><span>Pré-visualização</span><span class="hint">Atualiza ao executar</span></div><iframe id="preview" title="Pré-visualização do HTML" sandbox="allow-scripts allow-forms allow-modals allow-popups"></iframe></section>
+</main>
+<script>
+const code=document.querySelector('#code'), preview=document.querySelector('#preview');
+function run(){preview.srcdoc=code.value}
+document.querySelector('#run').addEventListener('click',run);
+code.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();run()}});
+code.value='<!doctype html>\n<html>\n<head>\n  <meta charset="utf-8">\n  <title>A minha página</title>\n</head>\n<body>\n  <h1>Olá, mundo!</h1>\n  <p>Apaga isto e cola o teu HTML.</p>\n</body>\n</html>';
+run();
+</script>
+</body>
+</html>
